@@ -10,9 +10,9 @@
 ## 📍 Contents
 - [1️⃣ Contributors](#1%EF%B8%8F⃣-contributors)
 - [2️⃣ Overview](#2%EF%B8%8F⃣-overview)
-- [3️⃣ Business Model](#3%EF%B8%8F⃣-business-model)
-- [4️⃣ Expectations](#4%EF%B8%8F⃣-expectations)
-- [5️⃣ Skills & Architecture](#5%EF%B8%8F⃣-skills--architecture)
+- [3️⃣ Expectations](#3%EF%B8%8F⃣-expectations)
+- [4️⃣ Skills](#4%EF%B8%8F⃣-skills)
+- [5️⃣ How to do](#5%EF%B8%8F⃣-how-to-do)
 - [6️⃣ Trouble Shooting](#6%EF%B8%8F%E2%83%A3-trouble-shooting)
 - [7️⃣ Retrospective](#7%EF%B8%8F%E2%83%A3-retrospective)
 
@@ -22,7 +22,7 @@
 ## 1️⃣ Contributors
 <br>
 
-|<img src="https://avatars.githubusercontent.com/u/80048007?v=4" width="220" height="200"/>|<img src="https://avatars.githubusercontent.com/u/60309978?v=4" width="220" height="200"/>|<img src="https://avatars.githubusercontent.com/u/193213283?v=4" width="220" height="200"/>|<img src="https://avatars.githubusercontent.com/u/115103394?v=4" width="220" height="200"/>|
+|<img src="https://github.com/DoomchitYJ.png" width="220" height="200"/>|<img src="https://github.com/imhaeunim.png" width="220" height="200"/>|<img src="https://github.com/jinhyunpark929.png" width="220" height="200"/>|<img src="https://github.com/letmeloveyou82.png" width="220" height="200"/>|
 |:-:|:-:|:-:|:-:|
 |박영진<br/>[@DoomchitYJ](https://github.com/DoomchitYJ)|임하은<br/>[@imhaeunim](https://github.com/imhaeunim)|박진현<br/>[@jinhyunpark929](https://github.com/jinhyunpark929)|최윤정<br/>[@letmeloveyou82](https://github.com/letmeloveyou82)|
 
@@ -30,36 +30,35 @@
 
 ## 2️⃣ Overview
 
-<br> 
+### ⚽ 목표 <br>
 
-### 💡 Background<br>
-
+- MySQL DB 서버의 메모리를 모니터링하고 로그 저장
+- 메모리 사용량에 따라 조치 자동 실행
 <br>
 
 
-## 3️⃣ Business Model
+## 3️⃣ Expectations
+### 🚨 조치 <br>
 
+- **메모리 70% 초과 시 경고 메일만 발송하여 사전 대응**
+- **메모리 90% 초과 시 DB 서비스는 유지하면서도 부하를 줄일 수 있는 조치 실행**
+    - 오래된 **쿼리 종료** (실행 시간이 긴 쿼리 정리)
+    - **Idle 세션 종료** (불필요한 연결 해제)
+    - **캐시 정리** (OS 레벨 캐시 해제)
+    - **스왑 해제 & 재활성화** (Swap 사용률이 높다면)
 <br>
 
-## 4️⃣ Expectations
-
-<br>
-
-## 5️⃣ Skills & Architecture
+## 4️⃣ Skills
 
 ### 🛠 Skills
 
 **Tech Stack**
 
 <div>
+<img src="https://img.shields.io/badge/linux-FCC624?style=for-the-badge&logo=linux&logoColor=black">
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white">
+<img src="https://img.shields.io/badge/jmeter-D22128?style=for-the-badge&logo=apachejmeter&logoColor=white">
 
-<img src="https://img.shields.io/badge/html-E34F26?style=for-the-badge&logo=html5&logoColor=white">
-<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
-<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
-<br>
-<img src="https://img.shields.io/badge/oracle-F80000?style=for-the-badge&logo=oracle&logoColor=white">
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
-<img src="https://img.shields.io/badge/apache tomcat-F8DC75?style=for-the-badge&logo=apachetomcat&logoColor=white">
 </div>
 
 <br>
@@ -67,84 +66,114 @@
 **Co-work Stack**
 
 <div>
-<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white"> 
+<img src="https://img.shields.io/badge/notion-000000?style=for-the-badge&logo=notion&logoColor=white">
 <img src="https://img.shields.io/badge/github-303a50?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/slack-e01e5a?style=for-the-badge&logo=slack&logoColor=white">
 </div>
 
 <br>
 
-### 🖥️ Architecture
 
-**☁️ ERD**
+## 5️⃣ How to do
+### 1. 쉘 스크립트 작성 및 저장
 
-![image](https://github.com/user-attachments/assets/922edc9b-e8a0-47fc-ad12-d149e3ac8a50)
+#### ✏️ 쉘 스크립트
+```bash
+#!/bin/bash
 
-<br>
+# 설정값
+EMAIL="admin@example.com"   # 관리자 이메일
+MEM_THRESHOLD=70            # 경고 알림 기준 (%)
+CRITICAL_THRESHOLD=90       # 강제 조치 기준 (%)
+LOG_FILE="/var/log/db_memory_monitor.log"
+HOSTNAME=$(hostname)
+MYSQL_USER="root"           # MySQL 사용자
+MYSQL_PASSWORD="your_password" # MySQL 비밀번호
 
-**💻 System Architecture**
+# 현재 메모리 사용량 확인
+MEMORY_USAGE=$(free | awk '/Mem:/ {printf("%.0f"), $3/$2 * 100}')
+DATE=$(date "+%Y-%m-%d %H:%M:%S")
 
-![image](https://github.com/user-attachments/assets/40f13681-7695-48f2-bb87-e5b650a0d767)
+# 로그 기록 함수
+log_message() {
+    echo "$DATE $1" | tee -a $LOG_FILE
+}
 
+# 1️⃣ 70% 초과 시 관리자에게 메일 알림
+if [ "$MEMORY_USAGE" -ge "$MEM_THRESHOLD" ]; then
+    log_message "[ALERT] Memory Usage High: $MEMORY_USAGE% - Sending alert email"
+
+    MESSAGE="🚨 [ALERT] DB Server ($HOSTNAME)\nMemory Usage: $MEMORY_USAGE%\nPlease check the server!"
+    echo -e "$MESSAGE" | mail -s "[ALERT] DB Server High Memory Usage" $EMAIL
+fi
+
+# 2️⃣ 90% 초과 시 긴급 조치 실행
+if [ "$MEMORY_USAGE" -ge "$CRITICAL_THRESHOLD" ]; then
+    log_message "[CRITICAL] Memory Usage Exceeded 90%! Taking actions..."
+
+    # 오래 실행 중인 쿼리 종료 (10초 이상 실행된 쿼리)
+    log_message "[INFO] Killing long running queries..."
+    mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "
+        SELECT id FROM information_schema.processlist WHERE time > 10;" | while read id; do
+        mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "KILL $id;"
+    done
+
+    # Idle 세션 종료 (비활성 세션 제거)
+    log_message "[INFO] Terminating idle connections..."
+    mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "
+        SELECT id FROM information_schema.processlist WHERE command='Sleep' AND time > 60;" | while read id; do
+        mysql -u "$MYSQL_USER" -p"$MYSQL_PASSWORD" -e "KILL $id;"
+    done
+
+    # 캐시 정리 (리눅스 OS 레벨 캐시 정리)
+    log_message "[INFO] Dropping caches to free memory..."
+    sync; echo 3 | sudo tee /proc/sys/vm/drop_caches
+
+    # Swap 사용량 확인 후 필요하면 해제 및 재활성화
+    SWAP_USED=$(free | awk '/Swap:/ {print $3}')
+    if [ "$SWAP_USED" -gt 512 ]; then
+        log_message "[INFO] Swap usage detected ($SWAP_USED MB). Restarting swap..."
+        sudo swapoff -a && sudo swapon -a
+    fi
+
+    # 관리자에게 조치 완료 메일 전송
+    log_message "[INFO] Actions completed. Sending report to admin..."
+    MESSAGE="🔥 [CRITICAL] DB Server ($HOSTNAME)\nMemory Usage: $MEMORY_USAGE%\nActions Taken:\n- Long running queries killed\n- Idle connections terminated\n- Cache cleared\n- Swap reset (if needed)"
+    echo -e "$MESSAGE" | mail -s "[CRITICAL] DB Server Memory Alert - Actions Taken" $EMAIL
+fi
+
+```
+
+#### 스크립트 저장
+```bash
+nano /path/to/db_memory_monitor.sh
+```
+
+
+### 2. 실행 권한 부여
+```bash
+chmod +x /path/to/db_memory_monitor.sh
+```
+
+### 3. 자동 실행
+#### 5분마다 자동 실행되도록 cron에 등록
+```bash
+crontab -e
+*/5 * * * * /path/to/db_memory_monitor.sh
+```
 
 <br>
 
 
 ## 6️⃣ Trouble Shooting
 
-### ⚔ 로그인을 해도 ‘나의 수업’, '로그아웃’ 헤더가 보이지 않는 문제
 
-```java
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		System.out.println("***************");
-		String inputId = request.getParameter("id");
-		String inputPw = request.getParameter("pw");
-		
-		if (validateAccount(inputId, inputPw)) {
-			Cookie userIdCookie = new Cookie("userId", inputId);
-			Cookie userPwCookie = new Cookie("userPw", inputPw);
-			userIdCookie.setMaxAge(60*60);
-			userPwCookie.setMaxAge(60*60);
-			userIdCookie.setPath("/");
-			userPwCookie.setPath("/");
-			
-			response.addCookie(userIdCookie);
-			response.addCookie(userPwCookie);
-			
-			request.getRequestDispatcher("view/main.jsp").forward(request, response);
-		} else {
-			System.out.println("test");
-			request.setAttribute("errorMessage", "등록되지 않은 아이디 혹은 비밀번호입니다.");
-            response.sendRedirect("view/login.html"); 
-		}
-	}
-```
 
 **🧨원인:**
 
-forward 방식은 동일한 HTTP 요청을 유지하므로 로그인 정보(쿠키)가 이전의 상태(로그인 요청 전)를 유지하게 된다.
-
-따라서, 새로운 쿠키(로그인 정보)를 가지고 새로운 HTTP 요청을 보내는 redirect 방식을 이용해야 한다.
-
-<br>
-
-> **forward vs redirect 차이점**
->
->| **구분** | **forward** | **redirect** |
->| --- | --- | --- |
->| **HTTP 요청 개수** | 1번 (동일한 요청 유지) | 2번 (새로운 요청 발생) |
->| **URL 변경 여부** | 변경되지 않음 (로그인 URL 유지됨) | 변경됨 (로그인 후 `main.jsp` URL로 바뀜) |
->| **서버 요청 방식** | 서버 내부에서 JSP로 제어 이동 | 클라이언트에게 새로운 URL 요청을 보냄 |
->| **새로고침 시 동작** | 로그인 정보가 유지됨 (재요청 가능) | 새로고침해도 로그인 요청이 다시 발생하지 않음 |
->
-<br>
 
 **👌 해결방안**
 
-```response.sendRedirect("view/login.html");```
 
 <br>
 
