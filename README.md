@@ -33,6 +33,7 @@
 - MySQL DB 서버의 메모리를 모니터링하고 로그 저장
 - 메모리 사용량에 따라 조치 자동 실행
 - DB 서버의 안정성 확보
+- 유용한 부하 테스트 툴인 jMeter 다루기
 
 <br>
 
@@ -61,7 +62,7 @@
 
 <br>
 
-## 4️⃣ Expectations
+## 4️⃣ Action Plan
 ### 🚨 조치 <br>
 
 - **메모리 70% 초과 시 경고 메일만 발송하여 사전 대응**
@@ -74,7 +75,7 @@
 <br>
 
 
-## 5️⃣ How to do
+## 5️⃣ Execution
 ### 1. 쉘 스크립트 작성 및 저장
 
 #### ✏️ 쉘 스크립트
@@ -184,13 +185,26 @@ crontab -e
 
 ## 6️⃣ Trouble Shooting
 
+### ⚔ jMeter : driver 오류
 
+Response message:java.sql.SQLException: Cannot load JDBC driver class 'com.mysql.jdbc.Driver'
 
 **🧨원인:**
+![image](https://github.com/user-attachments/assets/c9787e5a-b48b-400c-b7b8-8e7626d147fd)
 
+사용하는 JDBC 드라이버 클래스가 잘못됨
+
+JMeter 5.x + MySQL 8.x 이상: com.mysql.cj.jdbc.Driver 사용해야 함!
+
+구버전(MySQL 5.x 이하): com.mysql.jdbc.Driver 가능
+
+<br>
 
 **👌 해결방안**
 
+```copy C:\Users\YourName\Downloads\mysql-connector-java-8.0.33.jar C:\jmeter\lib\```
+
+jmeter\lib\ 폴더에 mysql connector jar파일을 넣고 jmeter를 재부팅한다.
 
 <br>
 
