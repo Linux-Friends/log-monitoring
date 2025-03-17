@@ -3,15 +3,13 @@
 
 
 <br>
-
-
 <br>
 
 ## 📍 Contents
 - [1️⃣ Contributors](#1%EF%B8%8F⃣-contributors)
 - [2️⃣ Overview](#2%EF%B8%8F⃣-overview)
-- [3️⃣ Expectations](#3%EF%B8%8F⃣-expectations)
-- [4️⃣ Skills](#4%EF%B8%8F⃣-skills)
+- [3️⃣ Skills](#3%EF%B8%8F⃣-skills)
+- [4️⃣ Expectations](#4%EF%B8%8F⃣-expectations)
 - [5️⃣ How to do](#5%EF%B8%8F⃣-how-to-do)
 - [6️⃣ Trouble Shooting](#6%EF%B8%8F%E2%83%A3-trouble-shooting)
 - [7️⃣ Retrospective](#7%EF%B8%8F%E2%83%A3-retrospective)
@@ -34,21 +32,10 @@
 
 - MySQL DB 서버의 메모리를 모니터링하고 로그 저장
 - 메모리 사용량에 따라 조치 자동 실행
+
 <br>
 
-
-## 3️⃣ Expectations
-### 🚨 조치 <br>
-
-- **메모리 70% 초과 시 경고 메일만 발송하여 사전 대응**
-- **메모리 90% 초과 시 DB 서비스는 유지하면서도 부하를 줄일 수 있는 조치 실행**
-    - 오래된 **쿼리 종료** (실행 시간이 긴 쿼리 정리)
-    - **Idle 세션 종료** (불필요한 연결 해제)
-    - **캐시 정리** (OS 레벨 캐시 해제)
-    - **스왑 해제 & 재활성화** (Swap 사용률이 높다면)
-<br>
-
-## 4️⃣ Skills
+## 3️⃣ Skills
 
 ### 🛠 Skills
 
@@ -70,6 +57,18 @@
 <img src="https://img.shields.io/badge/github-303a50?style=for-the-badge&logo=github&logoColor=white">
 <img src="https://img.shields.io/badge/slack-e01e5a?style=for-the-badge&logo=slack&logoColor=white">
 </div>
+
+<br>
+
+## 4️⃣ Expectations
+### 🚨 조치 <br>
+
+- **메모리 70% 초과 시 경고 메일만 발송하여 사전 대응**
+- **메모리 90% 초과 시 DB 서비스는 유지하면서도 부하를 줄일 수 있는 조치 실행**
+    - 오래된 **쿼리 종료** (실행 시간이 긴 쿼리 정리)
+    - **Idle 세션 종료** (불필요한 연결 해제)
+    - **캐시 정리** (OS 레벨 캐시 해제)
+    - **스왑 해제 & 재활성화** (Swap 사용률이 높다면)
 
 <br>
 
