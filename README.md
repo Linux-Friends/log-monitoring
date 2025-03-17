@@ -32,6 +32,7 @@
 
 - MySQL DB 서버의 메모리를 모니터링하고 로그 저장
 - 메모리 사용량에 따라 조치 자동 실행
+- DB 서버의 안정성 확보
 
 <br>
 
@@ -81,24 +82,36 @@
 #!/bin/bash
 
 # 설정값
-EMAIL="admin@example.com"   # 관리자 이메일
+EMAIL="id@gmail.com"   # 관리자 이메일
 MEM_THRESHOLD=70            # 경고 알림 기준 (%)
 CRITICAL_THRESHOLD=90       # 강제 조치 기준 (%)
 LOG_FILE="/var/log/db_memory_monitor.log"
 HOSTNAME=$(hostname)
-MYSQL_USER="root"           # MySQL 사용자
-MYSQL_PASSWORD="your_password" # MySQL 비밀번호
+MYSQL_USER="..."           # MySQL 사용자
+MYSQL_PASSWORD="..." # MySQL 비밀번호
 
 # 현재 메모리 사용량 확인
 MEMORY_USAGE=$(free | awk '/Mem:/ {printf("%.0f"), $3/$2 * 100}')
 DATE=$(date "+%Y-%m-%d %H:%M:%S")
+
+# 로그 파일이 없으면 생성
+if [ ! -f "$LOG_FILE" ]; then
+    sudo touch "$LOG_FILE"
+    sudo chmod 666 "$LOG_FILE"  # 모든 사용자에게 쓰기 권한 부여
+fi
 
 # 로그 기록 함수
 log_message() {
     echo "$DATE $1" | tee -a $LOG_FILE
 }
 
-# 70% 초과 시 관리자에게 메일 알림
+# 70% 미만일 경우 memory usage log 작성
+if [ "$MEMORY_USAGE" -le "$MEM_THRESHOLD" ]; then
+    log_message "[INFO] Memory Usage Normal: $MEMORY_USAGE%"
+fi
+
+
+# 1️⃣ 70% 초과 시 관리자에게 메일 알림
 if [ "$MEMORY_USAGE" -ge "$MEM_THRESHOLD" ]; then
     log_message "[ALERT] Memory Usage High: $MEMORY_USAGE% - Sending alert email"
 
@@ -106,7 +119,7 @@ if [ "$MEMORY_USAGE" -ge "$MEM_THRESHOLD" ]; then
     echo -e "$MESSAGE" | mail -s "[ALERT] DB Server High Memory Usage" $EMAIL
 fi
 
-# 90% 초과 시 긴급 조치 실행
+# 2️⃣ 90% 초과 시 긴급 조치 실행
 if [ "$MEMORY_USAGE" -ge "$CRITICAL_THRESHOLD" ]; then
     log_message "[CRITICAL] Memory Usage Exceeded 90%! Taking actions..."
 
@@ -141,6 +154,7 @@ if [ "$MEMORY_USAGE" -ge "$CRITICAL_THRESHOLD" ]; then
     echo -e "$MESSAGE" | mail -s "[CRITICAL] DB Server Memory Alert - Actions Taken" $EMAIL
 fi
 
+
 ```
 
 #### ✉ 스크립트 저장
@@ -159,10 +173,10 @@ chmod +x /path/to/db_memory_monitor.sh
 <br>
 
 ### 3. 자동 실행
-#### 🕐 5분마다 자동 실행되도록 cron에 등록
+#### 🕐 1분마다 자동 실행되도록 cron에 등록
 ```bash
 crontab -e
-*/5 * * * * /path/to/db_memory_monitor.sh
+* * * * * /path/to/db_memory_monitor.sh
 ```
 
 <br>
