@@ -22,7 +22,7 @@
 ## 1️⃣ Contributors
 <br>
 
-|<img src="https://github.com/DoomchitYJ.png" width="220" height="200"/>|<img src="https://github.com/imhaeunim.png" width="220" height="200"/>|<img src="https://github.com/jinhyunpark929.png" width="220" height="200"/>|<img src="https://github.com/letmeloveyou82.png" width="220" height="200"/>|
+|<img src="https://github.com/DoomchitYJ.png" width="220" />|<img src="https://github.com/imhaeunim.png" width="220" />|<img src="https://github.com/jinhyunpark929.png" width="220" />|<img src="https://github.com/letmeloveyou82.png" width="220" />|
 |:-:|:-:|:-:|:-:|
 |박영진<br/>[@DoomchitYJ](https://github.com/DoomchitYJ)|임하은<br/>[@imhaeunim](https://github.com/imhaeunim)|박진현<br/>[@jinhyunpark929](https://github.com/jinhyunpark929)|최윤정<br/>[@letmeloveyou82](https://github.com/letmeloveyou82)|
 
@@ -99,7 +99,7 @@ log_message() {
     echo "$DATE $1" | tee -a $LOG_FILE
 }
 
-# 1️⃣ 70% 초과 시 관리자에게 메일 알림
+# 70% 초과 시 관리자에게 메일 알림
 if [ "$MEMORY_USAGE" -ge "$MEM_THRESHOLD" ]; then
     log_message "[ALERT] Memory Usage High: $MEMORY_USAGE% - Sending alert email"
 
@@ -107,7 +107,7 @@ if [ "$MEMORY_USAGE" -ge "$MEM_THRESHOLD" ]; then
     echo -e "$MESSAGE" | mail -s "[ALERT] DB Server High Memory Usage" $EMAIL
 fi
 
-# 2️⃣ 90% 초과 시 긴급 조치 실행
+# 90% 초과 시 긴급 조치 실행
 if [ "$MEMORY_USAGE" -ge "$CRITICAL_THRESHOLD" ]; then
     log_message "[CRITICAL] Memory Usage Exceeded 90%! Taking actions..."
 
@@ -144,19 +144,23 @@ fi
 
 ```
 
-#### 스크립트 저장
+#### ✉ 스크립트 저장
 ```bash
 nano /path/to/db_memory_monitor.sh
 ```
 
+<br>
 
-### 2. 실행 권한 부여
+### 2. 권한 부여
+#### 🖐 파일에 실행 권한 부여
 ```bash
 chmod +x /path/to/db_memory_monitor.sh
 ```
 
+<br>
+
 ### 3. 자동 실행
-#### 5분마다 자동 실행되도록 cron에 등록
+#### 🕐 5분마다 자동 실행되도록 cron에 등록
 ```bash
 crontab -e
 */5 * * * * /path/to/db_memory_monitor.sh
